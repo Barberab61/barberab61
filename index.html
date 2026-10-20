@@ -1,0 +1,632 @@
+
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BARBERAB61</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 30px 18px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #292929;
+  text-align: center;
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at top left, #fff 0%, transparent 60%),
+    linear-gradient(135deg, #f8f7f3, #eae7df, #fff);
+}
+
+.container {
+  width: 100%;
+  max-width: 620px;
+  min-height: 650px;
+  margin: 0 auto;
+  padding: 34px 30px;
+  background: rgba(255,255,255,.97);
+  border: 1px solid #e4e0d8;
+  border-radius: 18px;
+  box-shadow: 0 12px 40px rgba(0,0,0,.08);
+}
+
+.brand {
+  font-size: 40px;
+  font-weight: 800;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+.tagline {
+  margin: 0 0 30px;
+  font-size: 17px;
+  font-style: italic;
+  color: #777168;
+}
+
+h2 {
+  font-size: 26px;
+  margin-bottom: 12px;
+}
+
+p {
+  line-height: 1.7;
+  font-size: 17px;
+}
+
+/* DIENSTEN */
+.service {
+  display: block;
+  width: 100%;
+  padding: 20px 18px;
+  margin: 14px 0;
+  border: 1px solid #dedbd4;
+  border-radius: 11px;
+  background: white;
+  color: #292929;
+  font-size: 18px;
+  text-align: left;
+  cursor: pointer;
+  transition: background .2s, border-color .2s;
+}
+
+.service strong {
+  float: right;
+  margin-left: 8px;
+}
+
+.service:hover,
+.service.selected {
+  background: #f0eee9;
+  border-color: #55514a;
+}
+
+/* MAAND EN KALENDERKNOP */
+.month-navigation {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 46px;
+  margin: 18px auto 0;
+}
+
+.nav {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 12px 15px;
+  border: 1px solid #d9d5cd;
+  border-radius: 8px;
+  background: #292929;
+  color: white;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.nav:hover {
+  background: #45413b;
+}
+
+#monthLabel {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 17px;
+  font-weight: bold;
+  text-transform: capitalize;
+  pointer-events: none;
+}
+
+/* KALENDER */
+#calendar {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.dayname {
+  color: #777;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 10px 0;
+}
+
+.day {
+  min-width: 0;
+  min-height: 48px;
+  padding: 10px 0;
+  border: 1px solid #e4e0d8;
+  border-radius: 8px;
+  background: white;
+  color: #292929;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.day:hover,
+.day.selected {
+  background: #292929;
+  color: white;
+}
+
+.day:disabled {
+  background: #f1f0ed;
+  color: #c5c2bc;
+  border-color: #efede8;
+  cursor: not-allowed;
+}
+
+/* TIJDSTIPPEN */
+#times {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.time {
+  padding: 17px 10px;
+  border: 1px solid #dedbd4;
+  border-radius: 9px;
+  background: white;
+  color: #292929;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.time:hover,
+.time.selected {
+  background: #292929;
+  color: white;
+}
+
+/* INVULVELDEN */
+input {
+  display: block;
+  width: 100%;
+  padding: 17px;
+  margin: 15px 0;
+  border: 1px solid #dedbd4;
+  border-radius: 9px;
+  background: white;
+  color: #292929;
+  font-size: 17px;
+}
+
+input:focus {
+  outline: 2px solid #777168;
+  border-color: #777168;
+}
+
+/* ACTIEKNOP */
+.submit {
+  width: 100%;
+  padding: 18px 12px;
+  margin-top: 14px;
+  border: none;
+  border-radius: 9px;
+  background: #252525;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.submit:hover {
+  background: #45413b;
+}
+
+.small {
+  color: #88837b;
+  font-size: 13px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.confirmation {
+  padding: 20px 8px;
+}
+
+.checkmark {
+  font-size: 48px;
+  margin: 10px;
+}
+
+.reminder {
+  margin-top: 18px;
+  padding: 18px;
+  background: #f4f2ed;
+  border-radius: 10px;
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+/* TELEFOONS */
+@media (max-width: 480px) {
+  body {
+    padding: 14px 8px;
+  }
+
+  .container {
+    min-height: 600px;
+    padding: 25px 14px;
+  }
+
+  .brand {
+    font-size: 32px;
+  }
+
+  .tagline {
+    font-size: 15px;
+    margin-bottom: 25px;
+  }
+
+  h2 {
+    font-size: 23px;
+  }
+
+  .service {
+    padding: 16px 12px;
+    font-size: 16px;
+  }
+
+  .month-navigation {
+    min-height: 42px;
+  }
+
+  .nav {
+    padding: 10px 8px;
+    font-size: 11px;
+  }
+
+  #monthLabel {
+    font-size: 14px;
+    padding-left: 45px;
+    padding-right: 0;
+  }
+
+  #calendar {
+    gap: 4px;
+  }
+
+  .day {
+    min-height: 39px;
+    font-size: 14px;
+  }
+
+  .dayname {
+    font-size: 12px;
+  }
+
+  .time {
+    font-size: 16px;
+    padding: 14px 6px;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+  <div class="brand">BARBERAB61</div>
+  <p class="tagline">Best barber in town 😉</p>
+
+  <!-- STAP 1: DIENST -->
+  <section id="step1">
+    <h2>Kies je behandeling</h2>
+    <p>Kies een dienst om verder te gaan.</p>
+
+    <button class="service"
+      onclick="chooseService('Normale knipbeurt', 10)">
+      Normale knipbeurt <strong>€10</strong>
+    </button>
+
+    <button class="service"
+      onclick="chooseService('Knipbeurt + baard', 15)">
+      Knipbeurt + baard <strong>€15</strong>
+    </button>
+
+    <button class="service"
+      onclick="chooseService('Knipbeurt + Red One gel', 15)">
+      Knipbeurt + Red One gel <strong>€15</strong>
+    </button>
+  </section>
+
+  <!-- STAP 2: DATUM -->
+  <section id="step2" class="hidden">
+    <h2>Kies een datum</h2>
+    <p id="serviceSummary"></p>
+
+    <div class="month-navigation">
+      <button class="nav" onclick="moveMonth(-1)">
+        ‹ VORIGE
+      </button>
+
+      <span id="monthLabel"></span>
+    </div>
+
+    <div id="calendar"></div>
+  </section>
+
+  <!-- STAP 3: TIJD -->
+  <section id="step3" class="hidden">
+    <h2>Kies een tijdstip</h2>
+    <p id="dateSummary"></p>
+
+    <div id="times"></div>
+
+    <p class="small">
+      Dit zijn voorbeeldtijden. Live beschikbaarheid is nog niet gekoppeld.
+    </p>
+  </section>
+
+  <!-- STAP 4: GEGEVENS -->
+  <section id="step4" class="hidden">
+    <h2>Jouw gegevens</h2>
+    <p id="bookingSummary"></p>
+
+    <input
+      id="customerName"
+      type="text"
+      placeholder="Volledige naam"
+      autocomplete="name"
+    >
+
+    <input
+      id="customerPhone"
+      type="tel"
+      placeholder="Telefoonnummer"
+      autocomplete="tel"
+    >
+
+    <button class="submit" onclick="createAppointment()">
+      AFSPRAAK AANMAKEN
+    </button>
+
+    <p id="message" role="status"></p>
+  </section>
+
+  <!-- BEVESTIGING -->
+  <section id="step5" class="hidden confirmation">
+    <div class="checkmark">✓</div>
+
+    <h2>Afspraak aangemaakt!</h2>
+    <p id="finalSummary"></p>
+
+    <div class="reminder">
+      <strong>WhatsApp-herinnering</strong>
+      <p>
+        Automatische herinneringen moeten nog worden gekoppeld.
+      </p>
+    </div>
+
+    <p class="small">
+      Dit is nog een demo. Er worden geen echte WhatsApp-berichten
+      verstuurd en afspraken worden nog niet online opgeslagen.
+    </p>
+
+    <button class="submit" onclick="restartBooking()">
+      NIEUWE AFSPRAAK MAKEN
+    </button>
+  </section>
+
+</div>
+
+<script>
+let chosenService = "";
+let chosenPrice = 0;
+let chosenDate = "";
+let chosenTime = "";
+
+let shownMonth = new Date();
+shownMonth.setDate(1);
+
+function showStep(number) {
+  for (let i = 1; i <= 5; i++) {
+    document.getElementById("step" + i)
+      .classList.toggle("hidden", i !== number);
+  }
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+
+function chooseService(service, price) {
+  chosenService = service;
+  chosenPrice = price;
+  chosenDate = "";
+  chosenTime = "";
+
+  document.getElementById("serviceSummary").textContent =
+    service + " — €" + price;
+
+  shownMonth = new Date();
+  shownMonth.setDate(1);
+
+  drawCalendar();
+  showStep(2);
+}
+
+function formatDate(date) {
+  return date.getFullYear() + "-" +
+    String(date.getMonth() + 1).padStart(2, "0") + "-" +
+    String(date.getDate()).padStart(2, "0");
+}
+
+function drawCalendar() {
+  const calendar = document.getElementById("calendar");
+  const year = shownMonth.getFullYear();
+  const month = shownMonth.getMonth();
+
+  document.getElementById("monthLabel").textContent =
+    shownMonth.toLocaleDateString("nl-NL", {
+      month: "long",
+      year: "numeric"
+    });
+
+  calendar.innerHTML = "";
+
+  ["Ma", "Di", "Wo", "Do", "Vr", "Za", "Zo"].forEach(name => {
+    const label = document.createElement("div");
+    label.className = "dayname";
+    label.textContent = name;
+    calendar.appendChild(label);
+  });
+
+  const offset = (new Date(year, month, 1).getDay() + 6) % 7;
+
+  for (let i = 0; i < offset; i++) {
+    calendar.appendChild(document.createElement("div"));
+  }
+
+  const total = new Date(year, month + 1, 0).getDate();
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  for (let day = 1; day <= total; day++) {
+    const date = new Date(year, month, day);
+    const button = document.createElement("button");
+
+    button.type = "button";
+    button.className = "day";
+    button.textContent = day;
+
+    if (date < today || date.getDay() === 0) {
+      button.disabled = true;
+    }
+
+    if (chosenDate === formatDate(date)) {
+      button.classList.add("selected");
+    }
+
+    button.onclick = () => {
+      chosenDate = formatDate(date);
+
+      document.getElementById("dateSummary").textContent =
+        date.toLocaleDateString("nl-NL", {
+          weekday: "long",
+          day: "numeric",
+          month: "long",
+          year: "numeric"
+        });
+
+      drawTimes();
+      showStep(3);
+    };
+
+    calendar.appendChild(button);
+  }
+}
+
+function moveMonth(amount) {
+  const nextMonth = new Date(
+    shownMonth.getFullYear(),
+    shownMonth.getMonth() + amount,
+    1
+  );
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const currentMonth = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    1
+  );
+
+  if (nextMonth < currentMonth) {
+    return;
+  }
+
+  shownMonth = nextMonth;
+  drawCalendar();
+}
+
+function drawTimes() {
+  const area = document.getElementById("times");
+  area.innerHTML = "";
+
+  [
+    "10:00", "11:00", "12:00", "13:00",
+    "14:00", "15:00", "16:00", "17:00"
+  ].forEach(time => {
+    const button = document.createElement("button");
+
+    button.type = "button";
+    button.className = "time";
+    button.textContent = time;
+
+    if (chosenTime === time) {
+      button.classList.add("selected");
+    }
+
+    button.onclick = () => {
+      chosenTime = time;
+
+      document.getElementById("bookingSummary").textContent =
+        chosenService + " — €" + chosenPrice +
+        " | " + chosenDate + " om " + chosenTime;
+
+      document.getElementById("message").textContent = "";
+      showStep(4);
+    };
+
+    area.appendChild(button);
+  });
+}
+
+function createAppointment() {
+  const name =
+    document.getElementById("customerName").value.trim();
+
+  const phone =
+    document.getElementById("customerPhone").value.trim();
+
+  if (!name || !phone) {
+    document.getElementById("message").textContent =
+      "Vul eerst je naam en telefoonnummer in.";
+    return;
+  }
+
+  document.getElementById("finalSummary").textContent =
+    name + ", je hebt gekozen voor " + chosenService +
+    " op " + chosenDate + " om " + chosenTime +
+    ". Tot snel bij BARBERAB61!";
+
+  showStep(5);
+}
+
+function restartBooking() {
+  chosenService = "";
+  chosenPrice = 0;
+  chosenDate = "";
+  chosenTime = "";
+
+  document.getElementById("customerName").value = "";
+  document.getElementById("customerPhone").value = "";
+  document.getElementById("message").textContent = "";
+  document.getElementById("finalSummary").textContent = "";
+
+  showStep(1);
+}
+</script>
+</body>
+</html>
