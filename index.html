@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#f4f0e9">
+  <meta name="theme-color" content="#eee9e0">
   <title>BARBERAB61 | Afspraak maken</title>
-  <meta name="description" content="Boek jouw knipbeurt bij BARBERAB61. Bekijk de behandelingen en maak eenvoudig online een afspraak.">
+  <meta name="description" content="Boek eenvoudig jouw knipbeurt bij BARBERAB61.">
 
   <style>
     * {
@@ -19,19 +19,15 @@
       font-family: Arial, Helvetica, sans-serif;
       background: #eee9e0;
       color: #252525;
-      min-height: 100vh;
-      padding: 28px 16px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      padding: 24px 12px;
     }
 
     .container {
-      width: 100%;
-      max-width: 620px;
+      max-width: 720px;
+      margin: 0 auto;
       background: #fffdf9;
       border-radius: 18px;
-      padding: 36px 30px;
+      padding: 34px 24px;
       box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
       text-align: center;
     }
@@ -45,8 +41,7 @@
 
     .tagline {
       color: #68645e;
-      font-size: 16px;
-      margin-bottom: 26px;
+      margin-bottom: 24px;
     }
 
     .divider {
@@ -58,37 +53,37 @@
     }
 
     h2 {
-      font-size: 23px;
+      font-size: 24px;
       margin-bottom: 12px;
     }
 
     .intro {
       color: #66615b;
-      line-height: 1.6;
-      margin-bottom: 24px;
+      line-height: 1.7;
+      margin-bottom: 25px;
     }
 
     .services {
       display: grid;
       gap: 12px;
+      margin: 0 0 30px;
       text-align: left;
-      margin-bottom: 26px;
     }
 
     .service {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 14px;
+      gap: 12px;
       padding: 17px;
       border: 1px solid #e5dfd5;
       border-radius: 12px;
-      background: #fff;
+      background: white;
     }
 
     .service-name {
       font-weight: 600;
-      line-height: 1.45;
+      line-height: 1.5;
     }
 
     .price {
@@ -97,69 +92,78 @@
       white-space: nowrap;
     }
 
-    .booking-button {
-      display: block;
+    .booking-section {
+      margin-top: 32px;
+      padding-top: 28px;
+      border-top: 1px solid #e5dfd5;
+    }
+
+    .booking-intro {
+      color: #66615b;
+      line-height: 1.6;
+      margin: 0 auto 20px;
+      max-width: 470px;
+    }
+
+    .calendar-frame {
       width: 100%;
-      padding: 18px 16px;
-      background: #292929;
-      color: #fff;
-      text-decoration: none;
+      height: 700px;
+      border: 0;
       border-radius: 10px;
-      font-size: 17px;
-      font-weight: 800;
-      letter-spacing: 0.5px;
-      transition: background 0.2s, transform 0.2s;
+      background: #fff;
     }
 
-    .booking-button:hover {
-      background: #444;
-      transform: translateY(-1px);
-    }
-
-    .booking-note {
-      font-size: 13px;
-      color: #716b63;
-      line-height: 1.5;
-      margin-top: 13px;
-    }
-
-    .steps {
-      margin-top: 28px;
-      padding: 20px;
-      background: #f4f0e9;
-      border-radius: 12px;
-      text-align: left;
-    }
-
-    .steps h3 {
-      font-size: 16px;
-      margin-bottom: 12px;
-    }
-
-    .steps p {
-      color: #514d47;
+    .fallback {
+      margin-top: 18px;
+      color: #68645e;
       font-size: 14px;
-      line-height: 1.8;
+      line-height: 1.6;
+    }
+
+    .booking-link {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 13px 18px;
+      border-radius: 8px;
+      background: #292929;
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .booking-link:hover {
+      background: #444;
+    }
+
+    .whatsapp {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 14px 20px;
+      background: #292929;
+      color: white;
+      text-decoration: none;
+      border-radius: 9px;
+      font-weight: 700;
     }
 
     footer {
-      margin-top: 28px;
+      margin-top: 30px;
       color: #77716a;
       font-size: 12px;
-      line-height: 1.6;
+      line-height: 1.8;
     }
 
     @media (max-width: 480px) {
       body {
-        padding: 14px 10px;
+        padding: 12px 8px;
       }
 
       .container {
-        padding: 28px 18px;
+        padding: 26px 14px;
       }
 
       .service {
-        padding: 14px 12px;
+        padding: 14px 11px;
       }
 
       .service-name {
@@ -168,6 +172,10 @@
 
       .price {
         font-size: 17px;
+      }
+
+      .calendar-frame {
+        height: 750px;
       }
     }
   </style>
@@ -185,7 +193,7 @@
       <h2>Welkom bij BARBERAB61 💈</h2>
       <p class="intro">
         Tijd voor een frisse look? ✂️<br>
-        Bekijk onze behandelingen en boek eenvoudig jouw afspraak online.
+        Bekijk onze behandelingen en boek jouw afspraak online.
       </p>
     </section>
 
@@ -210,30 +218,35 @@
       </div>
     </section>
 
-    <section>
-      <a
-        class="booking-button"
-        href="https://calendar.app.google/XYjo9AmUVdapQwLx8"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        BOEK JE AFSPRAAK
-      </a>
-
-      <p class="booking-note">
-        Kies via onze online boekingspagina een beschikbaar tijdstip
-        dat jou uitkomt.
+    <section class="booking-section">
+      <h2>Boek je afspraak</h2>
+      <p class="booking-intro">
+        Kies hieronder een beschikbare datum en tijd.
+        Je afspraak wordt via onze online boekingspagina aangevraagd.
       </p>
-    </section>
 
-    <section class="steps">
-      <h3>Zo maak je een afspraak</h3>
-      <p>
-        1. Klik op ‘Boek je afspraak’.<br>
-        2. Kies een beschikbare datum en tijd.<br>
-        3. Vul de gevraagde gegevens in.<br>
-        4. Bevestig je afspraak via Google Agenda.
-      </p>
+      <!-- Google Calendar Appointment Scheduling begin -->
+      <iframe
+        class="calendar-frame"
+        src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3qN0Xdoc0yb6FJfybyxi3e6q4oujMiwgg44976bc9K4NftFF3E0T7ie07hkygsvwyLMepXB4_F?gv=true"
+        title="BARBERAB61 afspraak maken"
+        loading="lazy"
+        frameborder="0"
+        scrolling="auto">
+      </iframe>
+      <!-- Google Calendar Appointment Scheduling end -->
+
+      <div class="fallback">
+        Werkt de kalender niet goed op jouw apparaat?
+        <br>
+        <a
+          class="booking-link"
+          href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3qN0Xdoc0yb6FJfybyxi3e6q4oujMiwgg44976bc9K4NftFF3E0T7ie07hkygsvwyLMepXB4_F?gv=true"
+          target="_blank"
+          rel="noopener noreferrer">
+          Open de boekingspagina
+        </a>
+      </div>
     </section>
 
     <footer>
